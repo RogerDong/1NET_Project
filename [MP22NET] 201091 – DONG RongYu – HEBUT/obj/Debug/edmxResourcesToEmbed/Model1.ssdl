@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableNumber" Type="int" Nullable="false" />
+    <Property Name="DishName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Money" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dishes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DishName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Money" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RestaurantMap">
+    <Key>
+      <PropertyRef Name="Position" />
+    </Key>
+    <Property Name="Position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Existing" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Chairs" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IfSelected" Type="int" Nullable="false" />
+    <Property Name="HandledBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Waiters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="LastName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Sex" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="EarnedMoney" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="HandledTable" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Bill_ToRestaurantMap">
+    <End Role="RestaurantMap" Type="Self.RestaurantMap" Multiplicity="1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantMap">
+        <PropertyRef Name="Position" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="TableNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestaurantMap_ToWaiters">
+    <End Role="Waiters" Type="Self.Waiters" Multiplicity="0..1" />
+    <End Role="RestaurantMap" Type="Self.RestaurantMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Waiters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RestaurantMap">
+        <PropertyRef Name="HandledBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestaurantMap" EntityType="Self.RestaurantMap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Waiters" EntityType="Self.Waiters" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bill_ToRestaurantMap" Association="Self.FK_Bill_ToRestaurantMap">
+      <End Role="RestaurantMap" EntitySet="RestaurantMap" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestaurantMap_ToWaiters" Association="Self.FK_RestaurantMap_ToWaiters">
+      <End Role="Waiters" EntitySet="Waiters" />
+      <End Role="RestaurantMap" EntitySet="RestaurantMap" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

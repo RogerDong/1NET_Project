@@ -1,0 +1,19 @@
+﻿<Page x:Class="_MP22NET__201091___DONG_RongYu___HEBUT.AdminPanelPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+	Title="AdminPanelPage">
+
+    <Grid>
+        <Button Content="Add, Update, Delete dishes" Margin="288,50,288,0" Height="58" VerticalAlignment="Top" Click="EditDishes" Background="#FF83D7F7"/>
+        <Button Content="Add, Update, Delete waiters/waitresses" Margin="288,150,288,0" Height="58" VerticalAlignment="Top" Click="EditDWaiters" Background="#FF83D7F7"/>
+        <Button Content="Edit the restaurant map" Margin="288,250,288,0" Height="58" VerticalAlignment="Top" Click="EditMap" Background="#FF83D7F7"/>
+        <Button Content="Statistics about all waiters/waitresses" Margin="288,350,288,0" Height="58" VerticalAlignment="Top" Click="ShowStatistics" Background="#FF83D7F7"/>
+        <Button Content="Back" Margin="288,450,288,0" Height="58" VerticalAlignment="Top" Click="Back" Background="#FF83D7F7"/>
+        
+
+    </Grid>
+</Page>
